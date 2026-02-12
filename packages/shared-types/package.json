@@ -1,0 +1,13 @@
+{
+  "name": "@cv-generator/shared-types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types for CV Generator",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
