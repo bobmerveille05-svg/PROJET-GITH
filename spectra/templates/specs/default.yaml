@@ -1,0 +1,56 @@
+# Spec Template for Spectra
+# This is the default template for creating new specs
+
+id: "{{ spec_id }}"
+name: "{{ spec_name }}"
+intent: |
+  Clear, concise statement of what this spec aims to achieve.
+  Should answer: What problem does this solve? Why is it important?
+
+ceremony_level: 0  # EXPLORE: 0, SKETCH: 1, DRAFT: 2, SPECIFIED: 3, VALIDATED: 4, LOCKED: 5
+lifecycle_state: "DRAFT"  # DRAFT, SPECIFIED, IMPLEMENTING, VALIDATING, COMPLETE, ARCHIVED
+
+structure:
+  files: []
+    # - path/to/file1.py
+    # - path/to/file2.py
+  modules: []
+    # - module_name
+
+dependencies:
+  depends_on: []
+    # - spec-id-1
+    # - spec-id-2
+  refines: null  # Optional: ID of spec this refines/elaborates
+  enables: []
+    # - spec-id-3
+
+acceptance:
+  tests:
+    - "Test criterion 1"
+    - "Test criterion 2"
+  criteria:
+    - "Acceptance criterion 1"
+    - "Acceptance criterion 2"
+
+review:
+  checklist:
+    - "[ ] Code follows project style guide"
+    - "[ ] All tests pass"
+    - "[ ] Documentation updated"
+    - "[ ] No breaking changes (or properly communicated)"
+  reviewers: []
+
+notes:
+  risks:
+    - "Potential risk 1"
+  assumptions:
+    - "Assumption 1"
+  questions:
+    - "Open question 1"
+
+links:
+  conflicts_with: []
+    # - spec-id-4
+  related: []
+    # - spec-id-5

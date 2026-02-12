@@ -1,0 +1,76 @@
+# JSON Schema for Spectra constitution files (as YAML)
+
+$schema: http://json-schema.org/draft-07/schema#
+$id: https://spectra.dev/schemas/constitution.schema.yaml
+title: Spectra Constitution
+description: Schema for Spectra constitution configuration files
+
+type: object
+required:
+  - profile
+  - rules
+
+properties:
+  profile:
+    type: string
+    description: Constitution profile name
+
+  description:
+    type: string
+    description: Profile description
+
+  settings:
+    type: object
+    properties:
+      strict_mode:
+        type: boolean
+        default: false
+      auto_fix:
+        type: boolean
+        default: false
+      ignore_archived:
+        type: boolean
+        default: true
+
+  rules:
+    type: array
+    description: List of constitution rules
+    items:
+      type: object
+      required:
+        - name
+        - type
+        - condition
+        - message
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: ["require", "forbid", "suggest"]
+        severity:
+          type: string
+          enum: ["error", "warning", "info"]
+          default: "error"
+        scope:
+          type: string
+          enum: ["all", "spec", "structure", "acceptance", "review"]
+          default: "all"
+        condition:
+          type: object
+          required:
+            - field
+            - operator
+          properties:
+            field:
+              type: string
+            operator:
+              type: string
+              enum: ["equals", "not_equals", "contains", "not_contains", "greater_than", "less_than", "exists", "not_exists"]
+            value:
+              description: Value to compare against (optional for exists/not_exists)
+        message:
+          type: string
+        enabled:
+          type: boolean
+          default: true

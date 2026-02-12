@@ -1,0 +1,79 @@
+profile: "strict"
+description: "Strict governance - everything required, no shortcuts"
+
+settings:
+  strict_mode: true
+  auto_fix: false
+  ignore_archived: true
+
+rules:
+  - name: "require_intent"
+    type: "require"
+    severity: "error"
+    scope: "spec"
+    condition:
+      field: "intent"
+      operator: "exists"
+    message: "Intent statement is required"
+    enabled: true
+
+  - name: "require_structure"
+    type: "require"
+    severity: "error"
+    scope: "structure"
+    condition:
+      field: "structure.files"
+      operator: "exists"
+    message: "Structure definition is required"
+    enabled: true
+
+  - name: "require_acceptance_tests"
+    type: "require"
+    severity: "error"
+    scope: "acceptance"
+    condition:
+      field: "acceptance.tests"
+      operator: "exists"
+    message: "Acceptance tests are required"
+    enabled: true
+
+  - name: "require_review_checklist"
+    type: "require"
+    severity: "error"
+    scope: "review"
+    condition:
+      field: "review.checklist"
+      operator: "exists"
+    message: "Review checklist is required"
+    enabled: true
+
+  - name: "require_reviewers"
+    type: "require"
+    severity: "error"
+    scope: "review"
+    condition:
+      field: "review.reviewers"
+      operator: "exists"
+    message: "At least one reviewer must be specified"
+    enabled: true
+
+  - name: "forbid_empty_intent"
+    type: "forbid"
+    severity: "error"
+    scope: "spec"
+    condition:
+      field: "intent"
+      operator: "equals"
+      value: ""
+    message: "Intent cannot be empty"
+    enabled: true
+
+  - name: "require_risk_assessment"
+    type: "require"
+    severity: "warning"
+    scope: "spec"
+    condition:
+      field: "notes.risks"
+      operator: "exists"
+    message: "Risk assessment is recommended"
+    enabled: true
