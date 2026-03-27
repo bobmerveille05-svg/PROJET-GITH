@@ -1,0 +1,59 @@
+profile: "balanced"
+description: "Balanced governance - reasonable defaults for most teams"
+
+settings:
+  strict_mode: false
+  auto_fix: false
+  ignore_archived: true
+
+rules:
+  - name: "require_intent"
+    type: "require"
+    severity: "error"
+    scope: "spec"
+    condition:
+      field: "intent"
+      operator: "exists"
+    message: "Intent statement is required"
+    enabled: true
+
+  - name: "suggest_structure"
+    type: "suggest"
+    severity: "info"
+    scope: "structure"
+    condition:
+      field: "structure"
+      operator: "exists"
+    message: "Consider defining implementation structure"
+    enabled: true
+
+  - name: "require_acceptance_tests"
+    type: "require"
+    severity: "warning"
+    scope: "acceptance"
+    condition:
+      field: "acceptance.tests"
+      operator: "exists"
+    message: "Acceptance tests should be defined"
+    enabled: true
+
+  - name: "suggest_review_checklist"
+    type: "suggest"
+    severity: "info"
+    scope: "review"
+    condition:
+      field: "review.checklist"
+      operator: "exists"
+    message: "Consider adding a review checklist"
+    enabled: true
+
+  - name: "forbid_empty_intent"
+    type: "forbid"
+    severity: "error"
+    scope: "spec"
+    condition:
+      field: "intent"
+      operator: "equals"
+      value: ""
+    message: "Intent cannot be empty"
+    enabled: true

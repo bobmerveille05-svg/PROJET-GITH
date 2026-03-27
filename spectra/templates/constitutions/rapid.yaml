@@ -1,0 +1,39 @@
+profile: "rapid"
+description: "Rapid iteration - minimal ceremony, fast iteration"
+
+settings:
+  strict_mode: false
+  auto_fix: true
+  ignore_archived: true
+
+rules:
+  - name: "require_intent"
+    type: "require"
+    severity: "warning"
+    scope: "spec"
+    condition:
+      field: "intent"
+      operator: "exists"
+    message: "Intent statement is recommended"
+    enabled: true
+
+  - name: "suggest_tests"
+    type: "suggest"
+    severity: "info"
+    scope: "acceptance"
+    condition:
+      field: "acceptance.tests"
+      operator: "exists"
+    message: "Consider adding acceptance tests"
+    enabled: true
+
+  - name: "forbid_empty_intent"
+    type: "forbid"
+    severity: "warning"
+    scope: "spec"
+    condition:
+      field: "intent"
+      operator: "equals"
+      value: ""
+    message: "Intent should not be empty"
+    enabled: true

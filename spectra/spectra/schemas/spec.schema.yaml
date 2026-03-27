@@ -1,0 +1,161 @@
+# JSON Schema for Spectra spec files (as YAML)
+# This defines the structure and validation rules for spec YAML files
+
+$schema: http://json-schema.org/draft-07/schema#
+$id: https://spectra.dev/schemas/spec.schema.yaml
+title: Spectra Spec
+description: Schema for Spectra specification files
+
+type: object
+required:
+  - id
+  - name
+  - intent
+
+properties:
+  id:
+    type: string
+    description: Unique identifier for the spec
+    pattern: "^[a-z0-9-]+$"
+
+  name:
+    type: string
+    description: Human-readable name for the spec
+    minLength: 1
+    maxLength: 200
+
+  intent:
+    type: string
+    description: Clear statement of what this spec aims to achieve
+    minLength: 10
+
+  ceremony_level:
+    type: integer
+    description: Current ceremony level (0-5)
+    minimum: 0
+    maximum: 5
+    default: 0
+
+  lifecycle_state:
+    type: string
+    description: Current lifecycle state
+    enum:
+      - DRAFT
+      - SPECIFIED
+      - IMPLEMENTING
+      - VALIDATING
+      - COMPLETE
+      - ARCHIVED
+    default: DRAFT
+
+  structure:
+    type: object
+    description: Implementation structure
+    properties:
+      files:
+        type: array
+        description: List of files this spec affects
+        items:
+          type: string
+      modules:
+        type: array
+        description: List of modules this spec affects
+        items:
+          type: string
+      components:
+        type: array
+        description: List of components this spec affects
+        items:
+          type: string
+
+  dependencies:
+    type: object
+    description: Spec dependencies and relationships
+    properties:
+      depends_on:
+        type: array
+        description: Specs that must be completed before this one
+        items:
+          type: string
+      refines:
+        type: string
+        description: Spec that this one refines/elaborates
+      enables:
+        type: array
+        description: Specs that this one enables/unlocks
+        items:
+          type: string
+
+  acceptance:
+    type: object
+    description: Acceptance criteria and tests
+    properties:
+      tests:
+        type: array
+        description: List of test criteria
+        items:
+          type: string
+      criteria:
+        type: array
+        description: List of acceptance criteria
+        items:
+          type: string
+
+  review:
+    type: object
+    description: Review process configuration
+    properties:
+      checklist:
+        type: array
+        description: Review checklist items
+        items:
+          type: string
+      reviewers:
+        type: array
+        description: Required reviewers
+        items:
+          type: string
+      approval_count:
+        type: integer
+        description: Number of approvals required
+        minimum: 0
+
+  notes:
+    type: object
+    description: Additional notes and context
+    properties:
+      risks:
+        type: array
+        description: Known risks
+        items:
+          type: string
+      assumptions:
+        type: array
+        description: Assumptions made
+        items:
+          type: string
+      questions:
+        type: array
+        description: Open questions
+        items:
+          type: string
+      context:
+        type: string
+        description: Additional context
+
+  links:
+    type: object
+    description: Links to other specs
+    properties:
+      conflicts_with:
+        type: array
+        description: Specs that conflict with this one
+        items:
+          type: string
+      related:
+        type: array
+        description: Related specs
+        items:
+          type: string
+
+additionalProperties: true
